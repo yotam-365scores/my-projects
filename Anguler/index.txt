@@ -1,0 +1,98 @@
+
+*************** Generate ***************
+D:\projects>ng generate --help
+
+Generates and/or modifies files based on a schematic.
+usage: ng generate <schematic> [options]
+
+arguments:
+  schematic
+    The schematic or collection:schematic to generate.
+
+options:
+  --defaults
+    Disable interactive input prompts for options with a default.
+  --dry-run (-d)
+    Run through and reports activity without writing out results.
+  --force (-f)
+    Force overwriting of existing files.
+  --help
+    Shows a help message for this command in the console.
+  --interactive
+    Enable interactive input prompts.
+
+Available Schematics:
+  Collection "@schematics/angular" (default):
+    app-shell
+    application
+    class
+    component
+    directive
+    enum
+    guard
+    interceptor
+    interface
+    library
+    module
+    pipe
+    resolver
+    service
+    service-worker
+    web-worker
+
+*************** New ***************
+C:\Users\yotam>ng new --help
+arguments:
+  name
+    The name of the new workspace and initial project.
+
+options:
+  --collection (-c)
+    A collection of schematics to use in generating the initial application.
+  --commit
+    Initial git repository commit information.
+  --create-application
+    Create a new initial application project in the 'src' folder of the new workspace. When false, creates an empty workspace with no initial application. You can then use the generate application command so that all applications are created in the projects folder.
+  --defaults
+    Disable interactive input prompts for options with a default.
+  --directory
+    The directory name to create the workspace in.
+  --dry-run (-d)
+    Run through and reports activity without writing out results.
+  --force (-f)
+    Force overwriting of existing files.
+  --help
+    Shows a help message for this command in the console.
+  --inline-style (-s)
+    Include styles inline in the component TS file. By default, an external styles file is created and referenced in the component TypeScript file.
+  --inline-template (-t)
+    Include template inline in the component TS file. By default, an external template file is created and referenced in the component TypeScript file.
+  --interactive
+    Enable interactive input prompts.
+  --legacy-browsers
+    Add support for legacy browsers like Internet Explorer using differential loading.
+  --minimal
+    Create a workspace without any testing frameworks. (Use for learning purposes only.)
+  --new-project-root
+    The path where new projects will be created, relative to the new workspace root.
+  --package-manager
+    The package manager used to install dependencies.
+  --prefix (-p)
+    The prefix to apply to generated selectors for the initial project.
+  --routing
+    Generate a routing module for the initial project.
+  --skip-git (-g)
+    Do not initialize a git repository.
+  --skip-install
+    Do not install dependency packages.
+  --skip-tests (-S)
+    Do not generate "spec.ts" test files for the new project.
+  --strict
+    Creates a workspace with stricter type checking and stricter bundle budgets settings. This setting helps improve maintainability and catch bugs ahead of time. For more information, see https://angular.io/guide/strict-mode
+  --style
+    The file extension or preprocessor to use for style files.
+  --verbose (-v)
+    Add more details to output logging.
+  --view-encapsulation
+    The view encapsulation strategy to use in the initial project.
+
