@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+// System.Linq.Enumerable
+using System.Linq;
 
 using HelperClassLibrary;
 
@@ -11,13 +13,15 @@ namespace LearningExamples
 		public static void Run()
 		{
 			//TestPower();
-
+			
 			TestStaticIEnumerableHelper();
 		}
 
 		public static void TestStaticIEnumerableHelper()
 		{
-			var arr = StaticHelper.GetArr(1, 17);
+			//System.Linq.Enumerable.Range()
+			//var arr = StaticHelper.GetArr(1, 17);
+			var arr = System.Linq.Enumerable.Range(1, 17);
 
 			// Foreach Syntax
 			//foreach (var Item in arr)
