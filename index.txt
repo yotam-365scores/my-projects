@@ -1,0 +1,3 @@
+npm install -g gulp @angular/cli@latest
+
+ng generate --help
