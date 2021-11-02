@@ -1,3 +1,4 @@
-npm install -g gulp @angular/cli@latest
+npm install -g gulp @angular/cli create-react-app react-scripts
 
-ng generate --help
+
+
