@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "npm start",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "npm start",
+        },
+        {
+            "type": "node-terminal",
+            "name": "npm install",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "npm install"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"url": "custom https://code.visualstudio.com/docs/editor/tasks",
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "TS Compile",
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"typescript.tsc.autoDetect": "off",
+			"grunt.autoDetect": "off",
+			"jake.autoDetect": "off",
+			"gulp.autoDetect": "on",
+			"npm.autoDetect": "off"
+		},
+		{
+			"label": "Run tests",
+			"type": "shell",
+			"command": "./scripts/test.sh",
+			"windows": {
+				"command": ".\\scripts\\test.cmd"
+			},
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "dir",
+			"type": "shell",
+			"command": "dir 'folder with spaces'"
+		},
+		{
+			"label": "dir",
+			"type": "shell",
+			"command": "dir",
+			"args": [
+				"folder with spaces",
+				{
+					"value": "folder with spaces",
+					"quoting": "escape"
+				}
+			]
+		},
+	]
+}
