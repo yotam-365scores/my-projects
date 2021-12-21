@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web;
 
 using LearningExamples;
 
@@ -9,29 +11,75 @@ namespace ConsoleApp1
     class Program
     {
         static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World! Main");
+		{
+			Console.WriteLine("Hello World! Main");
 
-            // tests of Process, Thread, Task
-            //ProcessThreadTaskTest.Run();
+			// tests of Process, Thread, Task
+			//ProcessThreadTaskTest.Run();
 
-            // Display powers of 2 up to the exponent of 3:
-            YieldExample.Run();
-            
-            //Console.WriteLine("long.MaxValue, "+ long.MaxValue);
+			// Display powers of 2 up to the exponent of 3:
+			//YieldExample.Run();
 
-            Exit();
+			//ToStringTest();
 
-        }
+			//Console.WriteLine("long.MaxValue, "+ long.MaxValue);
+
+			//QueryStringBuilderTest();
+
+			Exit();
+
+		}
+
+		private static void QueryStringBuilderTest()
+		{
+			var queryString = HttpUtility
+				// Builder: best to start with empty string.
+				.ParseQueryString(string.Empty);
+				// Parser: only for parse perpuses.
+				//.ParseQueryString("baseUri?GameStatuses=6");
+
+			Console.WriteLine("queryString: " + queryString.ToString());
+
+			//queryString.Add("SportifierGameStatusesFilter", GameStatuses.ToString());
+			new List<int>() { 5, 3, 4 }.
+				ForEach(num =>
+					queryString.Add("GameStatuses", num.ToString())
+				);
+
+			// will remove them all
+			//queryString.Remove("GameStatuses");
+
+			
+			var baseUri = "baseUri";
+
+			// Builder: 
+			var finalUri = string.Format(baseUri + "?{0}", queryString.ToString());
+
+			// Parser: 
+			//var finalUri = queryString.ToString();
+
+			Console.WriteLine("ConfigUrl with queryString: " + finalUri);
+		}
 
 
-        static void Exit()
+		private static void ToStringTest()
+		{
+			var p = new Programssss();
+			Console.WriteLine("Programssss obj:" + p.ToString());
+			Console.WriteLine("Programssss anonymous:" + new { p.name }.ToString());
+		}
+
+
+		static void Exit()
 		{
             Console.WriteLine("Press any key to continue Main");
             Console.ReadKey(false);
-            Console.WriteLine("ReadKey");
+            //Console.WriteLine("ReadKey");
         }
 
+    }
 
+    public class Programssss {
+        public string name = "som e namesss";
     }
 }
