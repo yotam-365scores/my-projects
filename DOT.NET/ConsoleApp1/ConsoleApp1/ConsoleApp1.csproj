@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\ClassLibrary\HelperClassLibrary\HelperClassLibrary.csproj" />
     <ProjectReference Include="..\..\ClassLibrary\LearningExamples\LearningExamples.csproj" />
     <ProjectReference Include="..\..\ClassLibrary\ProcessThreadTask\ProcessThreadTask.csproj" />
