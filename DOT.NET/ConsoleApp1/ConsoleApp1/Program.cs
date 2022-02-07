@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web;
 
 using LearningExamples;
 
+using Newtonsoft.Json;
+
 using ProcessThreadTask;
+using Newtonsoft.Json.Serialization;
 
 namespace ConsoleApp1
 {
@@ -19,15 +23,30 @@ namespace ConsoleApp1
 
 			// Display powers of 2 up to the exponent of 3:
 			//YieldExample.Run();
-
+			YieldExample.TestPower();
 			//ToStringTest();
 
 			//Console.WriteLine("long.MaxValue, "+ long.MaxValue);
 
 			//QueryStringBuilderTest();
 
+
+			//Serialize();
+
 			Exit();
 
+		}
+
+		private static void Serialize()
+		{
+			var listStr = JsonConvert.SerializeObject(new { ID_NAME = "some name" }, Formatting.None, new JsonSerializerSettings()
+			{
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				TypeNameHandling = TypeNameHandling.Auto
+			});
+
+			Console.WriteLine(listStr);
 		}
 
 		private static void QueryStringBuilderTest()
