@@ -16,52 +16,30 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sleep = exports.classWithDefaultCtor = exports.ClassWithDefaultCtor = void 0;
-const FilterActCouple_1 = require("./FilterActCouple");
-const ForeachData_1 = require("./ForeachData");
 const StaticHelper_1 = require("./StaticHelper");
-let message = 'Hello World';
-console.log(message);
-// Class With Default Constructor
-class ClassWithDefaultCtor {
-    constructor(params) {
-        Object.assign(this, params);
+function base() {
+    class Base {
     }
+    Base.prop = 'static prop in Base';
+    return Base;
 }
-exports.ClassWithDefaultCtor = ClassWithDefaultCtor;
-exports.classWithDefaultCtor = new ClassWithDefaultCtor({ name: 'some n' });
-// *****************************************
-function sleep(ms) {
-    /*
-    (async function run() {
-      console.log("d");
-      await sleep(1000);
-      console.log("dd");
-    })()
-      .catch((e) => console.error("catch: ", e))
-      .then((e) => console.log("then: "));
-       */
-    return new Promise((resolve) => setTimeout(resolve, ms));
+function derived() {
+    class Derived extends base() {
+    }
+    return Derived;
 }
-exports.sleep = sleep;
-const arrayFilter = FilterActCouple_1.ArrayFilter.initList();
-arrayFilter.push(FilterActCouple_1.FilterActCouple.initCouple(x => x.Item < 5, x => console.log('x < 5', x)));
-arrayFilter.push(FilterActCouple_1.FilterActCouple.initCouple(x => x.Item > 3, x => console.log('x > 3', x)));
-arrayFilter.push(FilterActCouple_1.FilterActCouple.initCouple(x => x.Item > 7, x => console.log('x > 7', x)));
-arrayFilter.push(FilterActCouple_1.FilterActCouple.initCouple((x => {
-    var length = x.all.length - 5;
-    return x.Item == length;
-}), x => console.log('length', x)));
+class Spec extends derived() {
+}
+console.log('Spec.prop', Spec.prop);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     var e_1, _a;
-    const iterator = (0, StaticHelper_1.GetArr)(0, 9);
+    const iterator = (0, StaticHelper_1.GetArr)(0, 12);
     try {
         //console.log('iterator.next', iterator.next().value)
         // best, need async scope
         for (var iterator_1 = __asyncValues(iterator), iterator_1_1; iterator_1_1 = yield iterator_1.next(), !iterator_1_1.done;) {
             const index = iterator_1_1.value;
-            console.log('in index, iterator.next', index);
-            arrayFilter.RunFilterAct(new ForeachData_1.ForeachData({ Item: index, Index: index }));
+            console.log('iterator.next', index);
         }
     }
     catch (e_1_1) { e_1 = { error: e_1_1 }; }
@@ -74,4 +52,4 @@ arrayFilter.push(FilterActCouple_1.FilterActCouple.initCouple((x => {
 }))()
     .catch((rejectedReason) => console.error('catch rejected Reason', rejectedReason))
     .then((onFulfilledValue) => console.log('then on Fulfilled Value', onFulfilledValue));
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=t.js.map

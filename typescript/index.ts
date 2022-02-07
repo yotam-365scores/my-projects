@@ -1,3 +1,8 @@
+import { ArrayFilter, FilterActCouple } from "./FilterActCouple";
+import { ForeachData } from "./ForeachData";
+import { FilterAct, GetArr } from "./StaticHelper";
+import * as t from "./t";
+
 let message: string = 'Hello World';
 console.log(message);
 
@@ -41,3 +46,29 @@ export function sleep(ms: number): Promise<unknown> {
 
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+
+const arrayFilter = ArrayFilter.initList<number>();
+arrayFilter.push(FilterActCouple.initCouple(x => x.Item < 5, x => console.log('x < 5', x)));
+arrayFilter.push(FilterActCouple.initCouple(x => x.Item > 3, x => console.log('x > 3', x)));
+arrayFilter.push(FilterActCouple.initCouple(x => x.Item > 7, x => console.log('x > 7', x)));
+arrayFilter.push(FilterActCouple.initCouple((x => {
+    var length = (x.all as Array<number>).length - 5;
+    return x.Item == length;
+}), x => console.log('length', x)));
+
+
+(async () => {
+
+    const iterator = GetArr(0,9);
+    //console.log('iterator.next', iterator.next().value)
+    
+    // best, need async scope
+    for await (const index of iterator) {
+        console.log('in index, iterator.next', index);
+        arrayFilter.RunFilterAct(new ForeachData({Item: index, Index: index}));
+    }
+    
+})()
+.catch((rejectedReason: any) => console.error('catch rejected Reason', rejectedReason))
+.then((onFulfilledValue: any) => console.log('then on Fulfilled Value', onFulfilledValue));
