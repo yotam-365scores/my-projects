@@ -1,3 +1,8 @@
+// ! this is an exclamation mark
+// ? this is a question mark 
+// * this is a highlight
+// todo this is a todo
+
 import logo from './logo.svg';
 //import {ShowList, NameForm} from './test';
 //import {StringBuilder} from './dynamic';
