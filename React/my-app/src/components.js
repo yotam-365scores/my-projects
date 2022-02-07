@@ -3,6 +3,8 @@ import { useBehaviorSubject } from "./common";
 //import { BehaviorSubject } from "rxjs";
 
 export const default_onChange = (innerValue, text) => {};
+export const defaultBase = { text: "", initialState: undefined, onChange: undefined, isDisabled: false };
+
 
 // Base for components
 export const GetBase = ({ text = "", initialState = undefined, onChange = undefined, isDisabled = false }) =>{
@@ -20,122 +22,107 @@ export const GetBase = ({ text = "", initialState = undefined, onChange = undefi
 
 }
 
-export const GetInput = ({ text = "", initialState = undefined, onChange = undefined, isDisabled = false }) => {
-  const [value, nextValue] = useState(initialState);
-  const [disabled, setDisabled] = useState(isDisabled);
-  
+export const GetInput = (param = defaultBase) => {  
+  /*
+  const behaviorSubject = new BehaviorSubject(initialState);
+  const [value, nextValue, subscribe, subscription, subscribable] =
+    useBehaviorSubject(behaviorSubject); */
+
+  //const base = GetBase({...param, isDisabled: true});
+  const base = GetBase(param);
+
+  const handleInputChange = (event) => {
+    try {
+      event.preventDefault();
+      const innerValue = event.target.value;
+      console.log("handleChange value: ", innerValue);
+      base.nextValue(innerValue);
+      if (base.events && base.events.onChange) {
+        base.events.onChange(innerValue, base.text);
+      }
+    } catch (error) {
+      console.error("handleChange error: ", error);
+    }
+  };
+
+  try {
+    const html = (
+      <input type="text" disabled={base.isDisabled} value={base.value} onChange={handleInputChange} />
+    );
+
+    console.log("GetInput: ", { ...base, html });
+
+    return { ...base, html };
+  } catch (error) {
+    console.error("handleSubmit ", error);
+  }
+};
+
+export const GetTextarea = (param = defaultBase) => {
   /* 
   const behaviorSubject = new BehaviorSubject(initialState);
   const [value, nextValue, subscribe, subscription, subscribable] =
     useBehaviorSubject(behaviorSubject); */
+
+  const base = GetBase(param);
+
   try {
-
-    var events = {};
-    if (onChange && onChange !== undefined) {
-      events.onChange = onChange;
-    }
-
-    //const input = GetInput({text: 'some Input', initialState: ''})
     const handleInputChange = (event) => {
       try {
         event.preventDefault();
         const innerValue = event.target.value;
         console.log("handleChange value: ", innerValue);
-        nextValue(innerValue);
-        if (events && events.onChange) {
-          events.onChange(innerValue, text);
+        base.nextValue(innerValue);
+        if (base.events && base.events.onChange) {
+          base.events.onChange(innerValue, base.text);
         }
       } catch (error) {
         console.error("handleChange error: ", error);
       }
     };
     const html = (
-      <input type="text" disabled={disabled} value={value} onChange={handleInputChange} />
+      <textarea value={base.value} disabled={base.isDisabled} onChange={handleInputChange} />
     );
 
-    console.log("GetInput: ", { html, value, nextValue, text, initialState, disabled });
+    console.log("GetInput: ", { ...base, html });
 
-    return { html, value, nextValue, text, setDisabled, isDisabled: disabled };
+    return { ...base, html };
   } catch (error) {
     console.error("handleSubmit ", error);
   }
 };
 
-export const GetTextarea = ({ text = "", initialState = undefined, onChange = undefined, isDisabled = false }) => {
+export const GetButton = (param = defaultBase) => {
   /* 
   const behaviorSubject = new BehaviorSubject(initialState);
   const [value, nextValue, subscribe, subscription, subscribable] =
     useBehaviorSubject(behaviorSubject); */
+
+  const base = GetBase(param);
+
   try {
-    const [value, nextValue] = useState(initialState);
-
-    var events = {};
-    if (onChange && onChange !== undefined) {
-      events.onChange = onChange;
-    }
-
-    //const input = GetInput({text: 'some Input', initialState: ''})
-    const handleInputChange = (event) => {
-      try {
-        event.preventDefault();
-        const innerValue = event.target.value;
-        console.log("handleChange value: ", innerValue);
-        nextValue(innerValue);
-        if (events && events.onChange) {
-          events.onChange(innerValue, text);
-        }
-      } catch (error) {
-        console.error("handleChange error: ", error);
-      }
-    };
-    const html = (
-      <textarea value={value} disabled={true} onChange={handleInputChange} />
-    );
-
-    console.log("GetInput: ", { html, value, nextValue, text, initialState });
-
-    return { html, value, nextValue, text };
-  } catch (error) {
-    console.error("handleSubmit ", error);
-  }
-};
-
-export const GetButton = ({ text = "", initialState = true, onClick = undefined }) => {
-  /* 
-  const behaviorSubject = new BehaviorSubject(initialState);
-  const [value, nextValue, subscribe, subscription, subscribable] =
-    useBehaviorSubject(behaviorSubject); */
-  try {
-    const [value, nextValue] = useState(initialState);
-
-    var events = {};
-    if (onClick && onClick !== undefined) {
-      events.onClick = onClick;
-    }
-
-    //const input = GetInput({text: 'some Input', initialState: ''})
     const html = (
       <button
       type="button"
       onClick={() => {
-        const val = !value;
-        nextValue(val);
+        const val = !base.value;
+        base.nextValue(val);
         console.log("handleChange value: ", val);
 
-        if (events && events.onClick) {
-          events.onClick(val, text);
+        if (base.events && base.events.onChange) {
+          base.events.onChange(val, base.text);
         }
 
       }}
     >
-      {text}
+      {base.text}
     </button>
 
     );
 
-    console.log("GetInput: ", { html, value, nextValue, text, initialState });
+    console.log("GetInput: ", { ...base, html });
 
-    return { html, value, nextValue, text };
+    return { ...base, html };
   } catch (error) {
     console.error("handleSubmit ", error);
   }
