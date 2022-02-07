@@ -21,7 +21,7 @@ namespace LearningExamples
 		{
 			//System.Linq.Enumerable.Range()
 			//var arr = StaticHelper.GetArr(1, 17);
-			var arr = System.Linq.Enumerable.Range(1, 17);
+			var arr = System.Linq.Enumerable.Range(1, 13);
 
 			// Foreach Syntax
 			//foreach (var Item in arr)
@@ -58,16 +58,22 @@ namespace LearningExamples
 
 		}
 
-		public static void TestPower()
+		public static void TestPower1()
 		{
 			// Display powers of 2 up to the exponent of 8:
 			var PowerArr = YieldExample
-				.Power(2, 3)
-				.Filter(x => x <= 4)
-				.Foreach(x => Console.WriteLine("in Foreach, x: " + x))
+				.Powers(2, 3);
 
-				.Filter(x => x < 4)
-				.Foreach(x => Console.WriteLine("in Foreach x < 4, x: " + x))
+			PowerArr
+				.Filter(x => x < 40)
+				.Foreach(x => Console.WriteLine("in Foreach x < 40, x: " + x))
+				.Done()
+				;
+
+			PowerArr
+				.Filter(x => x >= 4)
+				.Foreach(x => Console.WriteLine("in Foreach, x >= 4: " + x))
+				.Done()
 				;
 
 			//PowerArr.Foreach();
@@ -77,14 +83,43 @@ namespace LearningExamples
 			}
 
 		}
+		
+		public static void TestPower()
+		{
+			// Display powers of 2 up to the exponent of 8:
+			var PowerArr = YieldExample
+				.Powers(2, 3);
 
-		public static IEnumerable<int> Power(int number, int exponent)
+			var filterAct = new FilterList<int>() {
+					new FilterActCouple<int>(){isDo = x => x < 40, actionToDo = x => Console.WriteLine("in Foreach x < 40, x: " + x) },
+					new FilterActCouple<int>(){isDo = x => x >= 4, actionToDo = x => Console.WriteLine("in Foreach, x >= 4: " + x) },
+				};
+
+			PowerArr
+				//.Filter(x => x.>)
+				.FilterAct(filterAct)
+				.Done()
+				;
+
+			//PowerArr.Foreach();
+			PowerArr.Foreach((num) =>
+			{
+				filterAct.ForEach((filterActItem) =>
+				{
+					filterActItem.run(num);
+				});
+				Console.WriteLine("in Run, num: {0} ", num);
+			});
+
+		}
+
+		public static IEnumerable<int> Powers(int number, int exponent)
 		{
 			int result = 1;
 
 			for (int i = 0; i < exponent; i++)
 			{
-				result = result * number;
+				result *= number;
 				yield return result;
 			}
 		}
