@@ -14,15 +14,10 @@ export const baseDataArr1 = [
 ];
 
 export const baseDataArr = [
-    {
-      "name": "base-branch",
-      "value": "base"
-    },
-    {
-      "name": "new-branch",
-      "value": "new"
-    }
-  ]
+  { name: "base-branch", value: "base", },
+  { name: "new-branch", value: "new", },
+];
+
 const defaultItem = {
   title: `long`,
   template: `{user.name}: Welcome back, {username}!`,
@@ -38,7 +33,18 @@ export const arrTemplates1 = [
   },
 ];
 
-export const arrTemplates = [{
-    "title": "long",
-    "template": `git checkout {base-branch} // move to branch\n    git pull\n    git checkout {new-branch} // move to branch\n    git pull\n    git merge {base-branch} // VS visual merge. will see conflicts, resolve them locally\n    git status // check resolved conflicts\n    git merge --continue // git merge --abort will stop merge prosess and let you do reset to base.\n    git push origin HEAD\n`
-  }]
+// todo: add internal data to Template
+export const arrTemplates = [
+  {
+    title: "git merge",
+    template: 
+`git checkout {base-branch} // move to branch
+git pull\n
+git checkout {new-branch} // move to branch\n
+git pull\n
+git merge {base-branch} // VS visual merge. will see conflicts, resolve them locally\n
+git status // check resolved conflicts\n
+git merge --continue // git merge --abort will stop merge prosess and let you do reset to base.\n
+git push origin HEAD\n`,
+  },
+];

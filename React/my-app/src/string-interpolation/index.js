@@ -68,44 +68,48 @@ export const StringInterpolation = (_props = defaultProps) => {
   const [dataProps, setDataProps] = useState(baseDataArr);
   const [dataAliases, setDataAliases] = useState(arrAliases);
 
+    /* data Templates */
+    const DataTemplatesMap = (item, key) => {
+    const textareaTemplate = GetTextarea({
+      initialState: item.template,
+      onChange: (val) => {
+        item.template = val;
+      },
+    });
+
+    const btnIsEdit = GetButton({
+      initialState: false,
+      text: "show/hide",
+      onClick: (val) => {},
+    });
+
+    return (
+      <Fragment key={key}>
+        <div className="card rounded-3 text-white bg-secondary flex-grow-1">
+          <div className="card-header py-3">
+            <h4 className="my-0">{item.title}</h4>
+          </div>
+          <div className="card-body">
+            <div>
+              {/* todo: change to component */}
+              <textarea disabled={true} value={Interpolate(item.template)} cols="50" ></textarea>
+              <div className="ms-auto">{btnIsEdit.html}</div>
+            </div>
+            {btnIsEdit.value ? (
+              <div className="row">{textareaTemplate.html}</div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
   /* data Templates */
   const dataTemplatesSection = (
     <Fragment>
       <div className={flexRowClasses + " mb-4"}>
-        {dataTemplates.map((item, key) => {
-          const textareaTemplate = GetTextarea({
-            initialState: item.template,
-            onChange: (val) => {
-              item.template = val;
-            },
-          });
-          const btnIsEdit = GetButton({
-            initialState: false,
-            text: "show/hide",
-            onClick: (val) => {},
-          });
-
-          return (
-            <Fragment key={key}>
-              <div className="card rounded-3 text-white bg-secondary">
-                <div className="card-header py-3">
-                  <h4 className="my-0">{item.title}</h4>
-                </div>
-                <div className="card-body">
-                  <div>
-                    {Interpolate(item.template)}{" "}
-                    <div className="ms-auto">{btnIsEdit.html}</div>
-                  </div>
-                  {btnIsEdit.value ? (
-                    <div className="row">{textareaTemplate.html}</div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            </Fragment>
-          );
-        })}
+        {dataTemplates.map(DataTemplatesMap)}
 
         <Fragment key={dataProps.length}>
           <div
@@ -191,14 +195,12 @@ export const StringInterpolation = (_props = defaultProps) => {
   const dataPrintSection = (
     <Fragment>
       <div className={flexRowClasses + " mb-4"}>
-        <div>
-          {btnIsShowTemplates.html}
-          {btnIsShowTemplates.value ? JSONPrettyTemplates : ""}
-        </div>
-        <div>
-          {btnIsShowData.html}
-          {btnIsShowData.value ? JSONPrettyData : ""}
-        </div>
+        {btnIsShowTemplates.html}
+        {btnIsShowData.html}
+      </div>
+      <div className={flexRowClasses + " mb-4"}>
+        {btnIsShowTemplates.value ? <div class="mx-2">Templates: {JSONPrettyTemplates}</div> : ""}
+        {btnIsShowData.value ? <div class="mx-2">Properties: {JSONPrettyData}</div> : ""}
       </div>
     </Fragment>
   );
@@ -229,10 +231,13 @@ export const StringInterpolation = (_props = defaultProps) => {
 
   return (
     <React.Fragment>
+      <h4>Properties Section</h4>
       {dataPropsSection}
       <hr />
+      <h4>Templates Section</h4>
       {dataTemplatesSection}
       <hr />
+      <h4>Print Section</h4>
       {dataPrintSection}
     </React.Fragment>
   );
