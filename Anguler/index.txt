@@ -1,3 +1,5 @@
+npm install -g @angular/cli
+
 
 *************** Generate ***************
 D:\projects>ng generate --help
