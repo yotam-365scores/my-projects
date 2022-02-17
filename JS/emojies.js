@@ -1,6 +1,27 @@
 
 // todo: add more emojies, not in AngularJS Emoji Picker
 // https://unicode.org/emoji/charts/full-emoji-list.html
+// https://www.w3schools.com/charsets/ref_utf_symbols.asp
+
+/*
+ * utf code for emojis:
+
+// struct in Dec
+&#9728;
+
+// Dec example
+128513
+&#128513;
+
+// Unicode is in Hex, convert to Dec to use in code.
+https://apps.timwhitlock.info/emoji/tables/unicode
+https://apps.timwhitlock.info/unicode/inspect/dec/128513
+
+// more options:
+https://www.w3schools.com/charsets/ref_utf_symbols.asp
+https://www.w3schools.com/charsets/ref_html_utf8.asp
+*/
+
 var emojies = {
   "face-smiling": [
     {
