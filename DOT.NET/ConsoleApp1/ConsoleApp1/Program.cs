@@ -9,21 +9,43 @@ using Newtonsoft.Json;
 
 using ProcessThreadTask;
 using Newtonsoft.Json.Serialization;
+using System.Net.Http;
+using HtmlAgilityPack;
+using System.Threading.Tasks;
+using System.Dynamic;
+
+using System.Reflection;
+using System.Diagnostics.Contracts;
+using ConsoleApp1.Tests;
 
 namespace ConsoleApp1
 {
-    class Program
+
+	class Program
     {
-        static void Main(string[] args)
+		static void Main(string[] args)
 		{
 			Console.WriteLine("Hello World! Main");
+			//tests();
+			//MyRedis.Run();
+
+
+			Exit();
+
+		}
+
+		static void tests()
+		{
+			Console.WriteLine("tests: ");
 
 			// tests of Process, Thread, Task
 			//ProcessThreadTaskTest.Run();
 
 			// Display powers of 2 up to the exponent of 3:
 			//YieldExample.Run();
-			YieldExample.TestPower();
+
+			//YieldExample.TestPower();
+
 			//ToStringTest();
 
 			//Console.WriteLine("long.MaxValue, "+ long.MaxValue);
@@ -33,7 +55,7 @@ namespace ConsoleApp1
 
 			//Serialize();
 
-			Exit();
+			//HttpScannersManager.Run();
 
 		}
 
@@ -101,4 +123,32 @@ namespace ConsoleApp1
     public class Programssss {
         public string name = "som e namesss";
     }
+
+	public static class ExpandObjectExtensions
+	{
+		public static TObject ToObject<TObject>(this IDictionary<string, object> someSource, BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public)
+			   where TObject : class, new()
+		{
+			Contract.Requires(someSource != null);
+			TObject targetObject = new TObject();
+			Type targetObjectType = typeof(TObject);
+
+			// Go through all bound target object type properties...
+			foreach (PropertyInfo property in
+						targetObjectType.GetProperties(bindingFlags))
+			{
+				// ...and check that both the target type property name and its type matches
+				// its counterpart in the ExpandoObject
+				if (someSource.ContainsKey(property.Name)
+					&& property.PropertyType == someSource[property.Name].GetType())
+				{
+					property.SetValue(targetObject, someSource[property.Name]);
+				}
+			}
+
+			return targetObject;
+		}
+	}
+
+
 }
