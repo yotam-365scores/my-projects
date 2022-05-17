@@ -17,21 +17,62 @@ using System.Dynamic;
 using System.Reflection;
 using System.Diagnostics.Contracts;
 using ConsoleApp1.Tests;
+using System.Drawing;
 
 namespace ConsoleApp1
 {
 
 	class Program
     {
+
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Hello World! Main");
-			//tests();
-			//MyRedis.Run();
-
+			tests();
 
 			Exit();
 
+		}
+
+		private static void LazyLoading_ExceptionHandeling()
+		{
+			Lazy<int> LazyWrapper = new Lazy<int>(() =>
+			{
+				// error case
+				throw new Exception("test Exception in Lazy");
+
+				// return case
+				//return 5;
+			});
+
+			try
+			{
+				Console.WriteLine("Lazy Wrapper test: " + LazyWrapper.Value);
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Lazy Wrapper error: " + ex.Message);
+			}
+		}
+
+		private static void EnumGetValues()
+		{
+			var t = ENumType.Option3;
+
+			// need to convert to index, not to enum value.
+			int index = Array.IndexOf(Enum.GetValues(t.GetType()), t);
+
+			Console.WriteLine("t-index: " + (index));
+			Console.WriteLine("t-value: " + (int)t);
+		}
+
+		private static void ColorTranslatorToHtml()
+		{
+			var MainColorInt = "-16777216";
+			var mainColor = Color.FromArgb(Convert.ToInt32(MainColorInt));
+			var hexMainColor = ColorTranslator.ToHtml(mainColor);
+			Console.WriteLine("hexMainColor, " + hexMainColor);
 		}
 
 		static void tests()
@@ -56,6 +97,14 @@ namespace ConsoleApp1
 			//Serialize();
 
 			//HttpScannersManager.Run();
+
+			//MyRedis.Run();
+
+			//ColorTranslatorToHtml();
+
+			//EnumGetValues();
+			
+			LazyLoading_ExceptionHandeling();
 
 		}
 
@@ -120,7 +169,14 @@ namespace ConsoleApp1
 
     }
 
-    public class Programssss {
+	public enum ENumType
+	{
+		Option1 = 1,
+		Option2 = 2,
+		Option3 = 4,
+	}
+
+	public class Programssss {
         public string name = "som e namesss";
     }
 
