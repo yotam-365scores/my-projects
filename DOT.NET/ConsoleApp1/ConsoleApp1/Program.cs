@@ -29,7 +29,6 @@ namespace ConsoleApp1
 		{
 			Console.WriteLine("Hello World! Main");
 			tests();
-
 			Exit();
 
 		}
@@ -103,8 +102,13 @@ namespace ConsoleApp1
 			//ColorTranslatorToHtml();
 
 			//EnumGetValues();
-			
-			LazyLoading_ExceptionHandeling();
+
+			//LazyLoading_ExceptionHandeling();
+
+			//AnonymousLikeDataStruct.test();
+
+			DateTimeFormatExample.run();
+
 
 		}
 
