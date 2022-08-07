@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ClassLibrary\HelperClassLibrary\HelperClassLibrary.csproj" />
     <ProjectReference Include="..\..\ClassLibrary\LearningExamples\LearningExamples.csproj" />
+    <ProjectReference Include="..\..\ClassLibrary\ObservableStart\ObservableStart.csproj" />
     <ProjectReference Include="..\..\ClassLibrary\ProcessThreadTask\ProcessThreadTask.csproj" />
   </ItemGroup>
 
