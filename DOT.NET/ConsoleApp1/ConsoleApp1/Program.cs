@@ -18,17 +18,21 @@ using System.Reflection;
 using System.Diagnostics.Contracts;
 using ConsoleApp1.Tests;
 using System.Drawing;
+using ObservableStart;
 
 namespace ConsoleApp1
 {
-
+	enum MyEnum
+	{
+		tmp1, tmp2
+	}
 	class Program
     {
 
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Hello World! Main");
-			tests();
+			Task.Run(tests).Wait();
 			Exit();
 
 		}
@@ -74,7 +78,7 @@ namespace ConsoleApp1
 			Console.WriteLine("hexMainColor, " + hexMainColor);
 		}
 
-		static void tests()
+		static async Task tests()
 		{
 			Console.WriteLine("tests: ");
 
@@ -107,8 +111,24 @@ namespace ConsoleApp1
 
 			//AnonymousLikeDataStruct.test();
 
-			DateTimeFormatExample.run();
+			//DateTimeFormatExample.run();
 
+			//var e = new ArgumentException();
+			//Console.WriteLine(e.GetType().FullName);
+			
+			// enum to string
+			MyEnum t = MyEnum.tmp1;
+			Console.WriteLine(t.ToString());
+
+			int y = 10_0_0;
+			Console.WriteLine(y.ToString());
+
+
+			await System_Threading_Channels.Main();
+
+			ObservableClass.StartBackgroundWork();
+
+			ObservableCreateClass.LongRunningOperationAsync();
 
 		}
 
