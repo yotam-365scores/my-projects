@@ -117,12 +117,11 @@ namespace ConsoleApp1
 			//Console.WriteLine(e.GetType().FullName);
 			
 			// enum to string
-			MyEnum t = MyEnum.tmp1;
-			Console.WriteLine(t.ToString());
+			//MyEnum t = MyEnum.tmp1;
+			//Console.WriteLine(t.ToString());
 
-			int y = 10_0_0;
-			Console.WriteLine(y.ToString());
-
+			//int y = 10_0_0;
+			//Console.WriteLine(y.ToString());
 
 			await System_Threading_Channels.Main();
 
