@@ -25,18 +25,6 @@ namespace ObservableStart
             Console.WriteLine("Wait completed");
         }
 
-        // Synchronous operation
-        public DataType DoLongRunningOperation(string param)
-        {
-            
-        }
-
-        public IObservable<DataType> LongRunningOperationAsync(string param)
-        {
-            return Observable.Create<DataType>(
-                o => Observable.ToAsync<string, DataType>(DoLongRunningOperation)(param).Subscribe(o)
-            );
-        }
     }
 
 
