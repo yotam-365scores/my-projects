@@ -126,9 +126,7 @@ namespace ConsoleApp1
 
 			await System_Threading_Channels.Main();
 
-			ObservableClass.StartBackgroundWork();
-
-			ObservableCreateClass.LongRunningOperationAsync();
+			ObservableTests.Tests();
 
 		}
 
