@@ -33,9 +33,16 @@ namespace ConsoleApp1
 		{
 			Console.WriteLine("Hello World! Main");
 			Task.Run(tests).Wait();
+			
 			Exit();
 
 		}
+
+		private static DateTime Min(DateTime date1, DateTime date2)
+		{
+			return (date1.CompareTo(date2) < 0) ? date1: date2;
+		}
+
 
 		private static void LazyLoading_ExceptionHandeling()
 		{
@@ -115,7 +122,7 @@ namespace ConsoleApp1
 
 			//var e = new ArgumentException();
 			//Console.WriteLine(e.GetType().FullName);
-			
+
 			// enum to string
 			//MyEnum t = MyEnum.tmp1;
 			//Console.WriteLine(t.ToString());
@@ -123,11 +130,13 @@ namespace ConsoleApp1
 			//int y = 10_0_0;
 			//Console.WriteLine(y.ToString());
 
-			await System_Threading_Channels.Main();
+			//await System_Threading_Channels.Main();
 
-			ObservableTests.Tests();
+			//ObservableTests.Tests();
 
+			//StringBuilderTester.run();
 		}
+
 
 		private static void Serialize()
 		{
