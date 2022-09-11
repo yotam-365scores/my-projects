@@ -19,6 +19,7 @@ using System.Diagnostics.Contracts;
 using ConsoleApp1.Tests;
 using System.Drawing;
 using ObservableStart;
+using System.IO;
 
 namespace ConsoleApp1
 {
@@ -85,59 +86,6 @@ namespace ConsoleApp1
 			Console.WriteLine("hexMainColor, " + hexMainColor);
 		}
 
-		static async Task tests()
-		{
-			Console.WriteLine("tests: ");
-
-			// tests of Process, Thread, Task
-			//ProcessThreadTaskTest.Run();
-
-			// Display powers of 2 up to the exponent of 3:
-			//YieldExample.Run();
-
-			//YieldExample.TestPower();
-
-			//ToStringTest();
-
-			//Console.WriteLine("long.MaxValue, "+ long.MaxValue);
-
-			//QueryStringBuilderTest();
-
-
-			//Serialize();
-
-			//HttpScannersManager.Run();
-
-			//MyRedis.Run();
-
-			//ColorTranslatorToHtml();
-
-			//EnumGetValues();
-
-			//LazyLoading_ExceptionHandeling();
-
-			//AnonymousLikeDataStruct.test();
-
-			//DateTimeFormatExample.run();
-
-			//var e = new ArgumentException();
-			//Console.WriteLine(e.GetType().FullName);
-
-			// enum to string
-			//MyEnum t = MyEnum.tmp1;
-			//Console.WriteLine(t.ToString());
-
-			//int y = 10_0_0;
-			//Console.WriteLine(y.ToString());
-
-			//await System_Threading_Channels.Main();
-
-			//ObservableTests.Tests();
-
-			//StringBuilderTester.run();
-		}
-
-
 		private static void Serialize()
 		{
 			var listStr = JsonConvert.SerializeObject(new { ID_NAME = "some name" }, Formatting.None, new JsonSerializerSettings()
@@ -190,6 +138,74 @@ namespace ConsoleApp1
 		}
 
 
+
+		static async Task tests()
+		{
+			Console.WriteLine("tests: ");
+
+			// tests of Process, Thread, Task
+			//ProcessThreadTaskTest.Run();
+
+			// Display powers of 2 up to the exponent of 3:
+			//YieldExample.Run();
+
+			//YieldExample.TestPower();
+
+			//ToStringTest();
+
+			//Console.WriteLine("long.MaxValue, "+ long.MaxValue);
+
+			//QueryStringBuilderTest();
+
+
+			//Serialize();
+
+			//HttpScannersManager.Run();
+
+			//MyRedis.Run();
+
+			//ColorTranslatorToHtml();
+
+			//EnumGetValues();
+
+			//LazyLoading_ExceptionHandeling();
+
+			//AnonymousLikeDataStruct.test();
+
+			//DateTimeFormatExample.run();
+
+			//var e = new ArgumentException();
+			//Console.WriteLine(e.GetType().FullName);
+
+			// enum to string
+			//MyEnum t = MyEnum.tmp1;
+			//Console.WriteLine(t.ToString());
+
+			//int y = 10_0_0;
+			//Console.WriteLine(y.ToString());
+
+			//await System_Threading_Channels.Main();
+
+			//ObservableTests.Tests();
+
+			//StringBuilderTester.run();
+
+			/*var _a = new A();
+			B.Func((B)_a);*/
+
+			List<int> lst = null;
+			// Error: One or more errors occurred. (Value cannot be null. (Parameter 'source'))
+			//var t = lst.FirstOrDefault();
+			//Console.WriteLine(t);
+
+			// Error: Object reference not set to an instance of an object
+			//foreach (var item in lst) { Console.WriteLine(item); }
+
+			// Error: Object reference not set to an instance of an object
+			//lst.ForEach((item) => { Console.WriteLine(item); });
+
+		}
+
 		static void Exit()
 		{
             Console.WriteLine("Press any key to continue Main");
@@ -236,5 +252,26 @@ namespace ConsoleApp1
 		}
 	}
 
+	/*class A
+	{
+		public int num { get; set; } = 4;
 
+
+	}
+
+	class B: A
+	{
+		public static void Func(B Item)
+		{
+			Console.WriteLine(Item.num + "-" + Item.num2);
+
+		}
+		public int num2 { get; set; } = 44;
+
+		public static explicit operator B(A item)
+		{
+			return new B() { num = item.num };
+		}
+
+	}*/
 }
