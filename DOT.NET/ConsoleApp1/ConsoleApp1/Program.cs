@@ -204,6 +204,8 @@ namespace ConsoleApp1
 			// Error: Object reference not set to an instance of an object
 			//lst.ForEach((item) => { Console.WriteLine(item); });
 
+			//Console.WriteLine(int.MaxValue);
+
 		}
 
 		static void Exit()
