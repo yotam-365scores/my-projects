@@ -206,6 +206,14 @@ namespace ConsoleApp1
 
 			//Console.WriteLine(int.MaxValue);
 
+			long max = long.MaxValue;
+			long max1 = max - 9223372036000000000;
+			//long max1 = max - 23372036000000000;
+			Console.WriteLine(((int)(max)));
+			Console.WriteLine(((max)));
+			Console.WriteLine(((int)(max1)));
+			//Console.WriteLine((int.MaxValue) == ((int)(max)));
+
 		}
 
 		static void Exit()
