@@ -2,13 +2,14 @@
 // ? this is a question mark 
 // * this is a highlight
 // todo this is a todo
+// todo1 this is anther todo
 
 import logo from './logo.svg';
 //import {ShowList, NameForm} from './test';
 //import {StringBuilder} from './dynamic';
 import {StringInterpolation} from './string-interpolation';
 
-//import {RxTest} from './rxTest';
+import {RxTest} from './rxTest';
 //import './Customize-bootstrap.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -32,7 +33,8 @@ function App() {
         <hr />
         <StringInterpolation  />
         <hr />
-        {/* <RxTest  />
+        <RxTest  />
+        {/* 
         <hr />
         <StringBuilder  />
         <hr />
