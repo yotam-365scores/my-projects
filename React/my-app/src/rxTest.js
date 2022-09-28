@@ -1,7 +1,7 @@
 import React from "react";
 /* import AutoComplete from '@components/autocomplete' */
 
-import { useBehaviorSubject } from "./common";
+import { useBehaviorSubject, useBehaviorSubjectRef } from "./common";
 import { GetInput } from "./components";
 import { Store } from "./store/store";
 const { Person } = Store;
@@ -53,7 +53,7 @@ export const RxTest = (_props = defaultProps) => {
   const props = Object.assign(defaultProps, _props);
 
   // rxjs section
-  const [firstValue, nextFirst] = useBehaviorSubject(data.first);
+  const [firstValue, nextFirst] = useBehaviorSubjectRef(data.first);
   const [lastValue] = useBehaviorSubject(data.last);
   const [fullName] = useBehaviorSubject(calced.fullName);
 
@@ -74,8 +74,11 @@ export const RxTest = (_props = defaultProps) => {
       event.preventDefault();
       const innerValue = event.target.value;
       console.log("handleChange value: ", innerValue);
+      //data.first.next(innerValue);
       nextFirst(innerValue);
-    } catch (error) {
+    } 
+    
+    catch (error) {
       console.error("handleChange error: ", error);
     }
   };
@@ -86,12 +89,12 @@ export const RxTest = (_props = defaultProps) => {
       <section>
         <legend>rxjs section</legend>
         <form onSubmit={handleSubmit}>
-          <div>value: {firstValue}</div>
+          <div>value: {firstValue.current}</div>
           <div>fullName: {fullName}</div>
 
           <label>
             Name:
-            <input type="text" value={firstValue} onChange={handleChange} />
+            <input type="text" value={firstValue.current} onChange={handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -115,4 +118,5 @@ export const RxTest = (_props = defaultProps) => {
 
     </React.Fragment>
   );
+
 };
