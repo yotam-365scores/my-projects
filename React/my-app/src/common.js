@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 import { BehaviorSubject, Subject } from "rxjs";
 
@@ -23,8 +23,10 @@ export const useBehaviorSubject = (subscribable = new BehaviorSubject()) => {
 };
 
 export const useBehaviorSubjectRef = (subscribable = new BehaviorSubject()) => {
-  /* const [refObj, next, subscriptionCurrent] = useBehaviorSubjectRef(new BehaviorSubject()); 
+  /* 
+  const [refObj, next, subscriptionCurrent] = useBehaviorSubjectRef(new BehaviorSubject());
   const val = refObj.current;
+  next(newVal);
   */
 
   // export set opening, to send changes from markup view
@@ -33,9 +35,13 @@ export const useBehaviorSubjectRef = (subscribable = new BehaviorSubject()) => {
   const refObj = useRef(subscribable?.value); // state
   const subscriptionRef = useRef(null); // state
 
+  const subscribeRef = (x) => refObj.current = (x);
+
+  // useLayoutEffect?
   useEffect(() => {
     // subscribeable subscribe to pass to markup view
-    subscriptionRef.current = subscribable.subscribe((x) => refObj.current = (x));
+    subscriptionRef.current = subscribable.subscribe(subscribeRef);
+    return () => { subscribable.unsubscribe(subscribeRef); }
   }, [subscribable]);
 
   //return [value, next];
