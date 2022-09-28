@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 
 //create your view hook
@@ -23,12 +23,14 @@ export const useBehaviorSubject = (subscribable = new BehaviorSubject()) => {
 };
 
 export const useBehaviorSubjectRef = (subscribable = new BehaviorSubject()) => {
-  /* const [value, next, subscribe, subscription, subscribable] = useBehaviorSubject(new BehaviorSubject()); */
+  /* const [refObj, next, subscriptionCurrent] = useBehaviorSubjectRef(new BehaviorSubject()); 
+  const val = refObj.current;
+  */
 
   // export set opening, to send changes from markup view
   const next = subscribable.next?.bind(subscribable);
 
-  const refObj = useRef(subscribable.value); // state
+  const refObj = useRef(subscribable?.value); // state
   const subscriptionRef = useRef(null); // state
 
   useEffect(() => {
