@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { BehaviorSubject } from "rxjs";
+
 
 //create your view hook
 export const useBehaviorSubject = (subscribable = new BehaviorSubject()) => {
@@ -20,6 +21,25 @@ export const useBehaviorSubject = (subscribable = new BehaviorSubject()) => {
   //return [value, next, subscribe, subscription, subscribable];
   return [value, next, subscribe, subscribable];
 };
+
+export const useBehaviorSubjectRef = (subscribable = new BehaviorSubject()) => {
+  /* const [value, next, subscribe, subscription, subscribable] = useBehaviorSubject(new BehaviorSubject()); */
+
+  // export set opening, to send changes from markup view
+  const next = subscribable.next?.bind(subscribable);
+
+  const refObj = useRef(subscribable.value); // state
+  const subscriptionRef = useRef(null); // state
+
+  useEffect(() => {
+    // subscribeable subscribe to pass to markup view
+    subscriptionRef.current = subscribable.subscribe((x) => refObj.current = (x));
+  }, [subscribable]);
+
+  //return [value, next];
+  return [refObj, next, subscriptionRef.current];
+};
+
 
 //create your forceUpdate hook
 export const useForceUpdate = () => {
