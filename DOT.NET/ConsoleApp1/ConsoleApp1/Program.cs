@@ -193,7 +193,7 @@ namespace ConsoleApp1
 			/*var _a = new A();
 			B.Func((B)_a);*/
 
-			List<int> lst = null;
+			//List<int> lst = null;
 			// Error: One or more errors occurred. (Value cannot be null. (Parameter 'source'))
 			//var t = lst.FirstOrDefault();
 			//Console.WriteLine(t);
@@ -206,13 +206,15 @@ namespace ConsoleApp1
 
 			//Console.WriteLine(int.MaxValue);
 
-			long max = long.MaxValue;
-			long max1 = max - 9223372036000000000;
+			//long max = long.MaxValue;
+			//long max1 = max - 9223372036000000000;
 			//long max1 = max - 23372036000000000;
-			Console.WriteLine(((int)(max)));
-			Console.WriteLine(((max)));
-			Console.WriteLine(((int)(max1)));
+			//Console.WriteLine(((int)(max)));
+			//Console.WriteLine(((max)));
+			//Console.WriteLine(((int)(max1)));
 			//Console.WriteLine((int.MaxValue) == ((int)(max)));
+
+			Console.WriteLine($"GetData Internal Error, {"tes"}");
 
 		}
 
